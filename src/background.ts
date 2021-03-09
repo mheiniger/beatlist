@@ -1,8 +1,6 @@
 import electron, { app, protocol, BrowserWindow } from "electron";
-import {
-  createProtocol,
-  installVueDevtools,
-} from "vue-cli-plugin-electron-builder/lib";
+import { createProtocol } from "vue-cli-plugin-electron-builder/lib";
+import installExtension, { VUEJS_DEVTOOLS } from "electron-devtools-installer";
 import path from "path";
 import registerIpc from "@/libraries/ipc";
 import BeatsaverLinkOpener from "@/libraries/ipc/BeatsaverLinkOpener";
@@ -65,7 +63,7 @@ class Background {
     app.on("ready", async () => {
       if (this.isDevelopment && !process.env.IS_TEST) {
         try {
-          await installVueDevtools();
+          await installExtension(VUEJS_DEVTOOLS);
         } catch (e) {
           console.error("Vue Devtools failed to install:", e.toString());
         }

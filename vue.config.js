@@ -13,6 +13,10 @@ module.exports = {
     },
   },
   configureWebpack: {
+    target: "electron-renderer",
+    module: {
+      rules: [{ test: /\.node$/, use: "ignore-loader" }],
+    },
     resolve: {
       alias: {
         "@": path.resolve(__dirname, "src"),
